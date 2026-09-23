@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI-Powered Adaptive Quiz Application</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="home-page">
+
+    <header class="site-header">
+        <a href="{{ url_for('home') }}" class="site-brand" aria-label="AI Quiz Application home">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="AI Quiz" class="navbar-logo">
+            <span>AI-Powered Adaptive Quiz Application</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="{{ url_for('home') }}" class="active" aria-current="page">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </nav>
+    </header>
+
+    <main class="home-main">
+
+        <section class="home-intro">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="AI Quiz logo" class="home-logo">
+            <h1>AI-Powered Adaptive Quiz Application</h1>
+
+            <h2>Test Your Knowledge. Improve Your Skills.</h2>
+
+            <p>
+                Practice quizzes and get personalized questions based on your performance.
+            </p>
+
+            <a href="{{ url_for('login') }}" class="home-button">
+                Get Started
+            </a>
+        </section>
+
+        <section class="home-section">
+            <h2>About the Project</h2>
+            <p>
+                This application helps students practice technical subjects and improve
+                their performance through adaptive quizzes and personalized recommendations.
+            </p>
+        </section>
+
+        <section class="home-section">
+            <h2>Quiz Categories</h2>
+            <div class="home-list home-category-list">
+                <span class="info-item category-item meaning-item" data-meaning="Programming language used to practice coding and problem-solving.">Python</span>
+                <span class="info-item category-item meaning-item" data-meaning="Object-oriented programming language used to build applications.">Java</span>
+                <span class="info-item category-item meaning-item" data-meaning="Markup language used to structure web pages.">HTML</span>
+                <span class="info-item category-item meaning-item" data-meaning="Data Structures and Algorithms for efficient problem-solving.">DSA</span>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <h2>How It Works</h2>
+            <div class="process-steps">
+                <span>Choose Category</span>
+                <span>Attempt Quiz</span>
+                <span>Get Score</span>
+                <span>Analyze Performance</span>
+                <span>Personalized Quiz</span>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <h2>Key Features</h2>
+            <div class="home-list feature-list">
+                <span class="info-item">Timed Quiz</span>
+                <span class="info-item">Automatic Evaluation</span>
+                <span class="info-item">Performance History</span>
+                <span class="info-item">Weak Topic Detection</span>
+                <span class="info-item">Adaptive Questions</span>
+                <span class="info-item">Personalized Recommendation</span>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <h2>Why Adaptive Quiz?</h2>
+            <p>
+                Unlike a normal quiz, this application uses your previous performance
+                to identify weak topics and provide a more personalized quiz experience.
+            </p>
+        </section>
+
+        <section class="home-cta">
+            <h2>Start your learning journey today.</h2>
+            <a href="{{ url_for('login') }}" class="home-button">Login to Start</a>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

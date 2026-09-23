@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - AI Quiz Application</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container dashboard-container">
+
+        <p class="dashboard-label">AI-Powered Adaptive Quiz Application</p>
+
+        <h1>Welcome, {{ name }}!</h1>
+
+        <p class="dashboard-subtitle">Track your progress and continue learning.</p>
+
+    
+
+        <!-- Statistics -->
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+                <h3>Quizzes Attempted</h3>
+                <p>{{ quizzes_attempted }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Best Score</h3>
+                <p>{{ best_score }}%</p>
+            </div>
+
+        </div>
+
+
+        <!-- Category-wise personalization -->
+
+        <h2 class="analysis-heading">AI Recommendations</h2>
+
+        {% if category_analysis %}
+        <div class="category-analysis-grid">
+
+            {% for analysis in category_analysis %}
+
+            <div class="card category-analysis-card">
+
+                <h3>{{ analysis.category|upper }}</h3>
+
+                <h4>AI Recommendation</h4>
+                <p>{{ analysis.recommendation }}</p>
+
+                <h4>Weak Topics</h4>
+
+                {% if analysis.weak_topics %}
+                    <ul>
+                        {% for topic in analysis.weak_topics %}
+                            <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No weak topics detected.</p>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+        {% else %}
+            <div class="card">
+                <p>No quiz attempted yet.</p>
+            </div>
+        {% endif %}
+
+
+        <!-- Navigation -->
+
+        <div class="dashboard-buttons">
+
+            <a href="{{ url_for('categories') }}">
+                <button>Start Quiz</button>
+            </a>
+
+            <a href="{{ url_for('history') }}">
+                <button>Quiz History</button>
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                <button>Logout</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

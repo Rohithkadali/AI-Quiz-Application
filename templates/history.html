@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Quiz History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Quiz History</h1>
+
+    <p>Your previous quiz results</p>
+
+    <br>
+
+    {% if results %}
+
+        {% for result in results %}
+
+        <div class="history-card">
+
+            <h3>
+                {{ result.category|upper }}
+            </h3>
+
+            <p>
+                Score:
+                {{ result.score }}/{{ result.total }}
+            </p>
+
+            <p>
+                Percentage:
+                <b>{{ result.percentage }}%</b>
+            </p>
+
+            {% if result._created_at_display %}
+            <p class="history-date">
+                Attempted:
+                {{ result._created_at_display }}
+            </p>
+            {% endif %}
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No quiz history available.</p>
+
+    {% endif %}
+
+    <br>
+
+   <a href="{{ url_for('dashboard') }}" class="back-button">
+    ← Back to Dashboard
+</a>
+
+</div>
+
+</body>
+
+</html>

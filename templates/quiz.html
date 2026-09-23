@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Quiz</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+    <div class="quiz-header">
+
+        <h2>{{ category|upper }} Quiz</h2>
+
+        <span>
+            Question {{ question_number }} / {{ total_questions }}
+        </span>
+
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div class="timer" id="timer">
+
+        Time Left: {{ remaining_time }}s
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div class="question-box">
+
+        <h3>{{ question }}</h3>
+
+    </div>
+
+
+    <!-- QUIZ FORM -->
+
+    <form method="POST" id="quizForm">
+
+        <div class="options">
+
+            {% for option in options %}
+
+            <label class="option">
+
+                <input
+                    type="radio"
+                    name="answer"
+                    value="{{ option }}"
+                    {% if selected_answer == option %}
+                    checked
+                    {% endif %}
+                >
+
+                <span>{{ option }}</span>
+
+            </label>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- NAVIGATION BUTTONS -->
+
+        <div class="navigation">
+
+
+            <!-- PREVIOUS -->
+
+            {% if current_number > 0 %}
+
+            <button
+                type="submit"
+                name="action"
+                value="previous"
+                class="nav-button">
+
+                Previous
+
+            </button>
+
+            {% endif %}
+
+
+            <!-- NEXT -->
+
+            {% if current_number < total_questions - 1 %}
+
+            <button
+                type="submit"
+                name="action"
+                value="next"
+                class="nav-button">
+
+                Next
+
+            </button>
+
+            {% endif %}
+
+
+            <!-- SUBMIT -->
+
+            {% if current_number == total_questions - 1 %}
+
+            <button
+                type="submit"
+                name="action"
+                value="submit"
+                class="submit-button">
+
+                Submit Quiz
+
+            </button>
+
+            {% endif %}
+
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- TIMER SCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+let timeLeft = {{ remaining_time }};
+
+
+let timer = setInterval(function () {
+
+
+    // Display remaining time
+
+    document.getElementById("timer").innerHTML =
+        "Time Left: " + timeLeft + "s";
+
+
+    // Decrease timer
+
+    timeLeft--;
+
+
+    // Time finished
+
+    if (timeLeft < 0) {
+
+        clearInterval(timer);
+
+
+        // Get quiz form
+
+        let form =
+            document.getElementById("quizForm");
+
+
+        // Create submit action
+
+        let input =
+            document.createElement("input");
+
+
+        input.type = "hidden";
+
+        input.name = "action";
+
+        input.value = "submit";
+
+
+        // Add action to form
+
+        form.appendChild(input);
+
+
+        // Automatically submit quiz
+
+        form.submit();
+
+    }
+
+
+}, 1000);
+
+</script>
+
+
+</body>
+
+</html>
