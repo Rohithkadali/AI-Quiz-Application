@@ -5,13 +5,21 @@ from dotenv import load_dotenv
 import os
 import requests
 import time
-
+import json
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-cred = credentials.Certificate("serviceAccountKey.json")
+firebase_service_account = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+
+if firebase_service_account:
+    cred = credentials.Certificate(
+        json.loads(firebase_service_account)
+    )
+else:
+    cred = credentials.Certificate("serviceAccountKey.json")
+
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
