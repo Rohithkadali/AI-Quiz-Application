@@ -1125,7 +1125,6 @@ def quiz(category, number):
         else quiz_questions[category]
     )
 
-    session["adaptive_questions"] = quiz_data
 
     # -----------------------------------------------------
     # Validate question number

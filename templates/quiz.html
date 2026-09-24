@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Quiz</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 
 <body>
 
 <div class="quiz-container">
+
+    <!-- ========================= -->
+    <!-- QUIZ HEADER -->
+    <!-- ========================= -->
 
     <div class="quiz-header">
 
@@ -26,16 +30,18 @@
     </div>
 
 
+    <!-- ========================= -->
     <!-- TIMER -->
+    <!-- ========================= -->
 
     <div class="timer" id="timer">
-
         Time Left: {{ remaining_time }}s
-
     </div>
 
 
+    <!-- ========================= -->
     <!-- QUESTION -->
+    <!-- ========================= -->
 
     <div class="question-box">
 
@@ -44,7 +50,9 @@
     </div>
 
 
+    <!-- ========================= -->
     <!-- QUIZ FORM -->
+    <!-- ========================= -->
 
     <form method="POST" id="quizForm">
 
@@ -72,7 +80,9 @@
         </div>
 
 
+        <!-- ========================= -->
         <!-- NAVIGATION BUTTONS -->
+        <!-- ========================= -->
 
         <div class="navigation">
 
@@ -143,13 +153,18 @@
 
 let timeLeft = {{ remaining_time }};
 
+const timerElement =
+    document.getElementById("timer");
 
-let timer = setInterval(function () {
+const quizForm =
+    document.getElementById("quizForm");
 
 
-    // Display remaining time
+const timer = setInterval(function () {
 
-    document.getElementById("timer").innerHTML =
+    // Show remaining time
+
+    timerElement.innerHTML =
         "Time Left: " + timeLeft + "s";
 
 
@@ -165,17 +180,10 @@ let timer = setInterval(function () {
         clearInterval(timer);
 
 
-        // Get quiz form
+        // Create hidden submit action
 
-        let form =
-            document.getElementById("quizForm");
-
-
-        // Create submit action
-
-        let input =
+        const input =
             document.createElement("input");
-
 
         input.type = "hidden";
 
@@ -184,17 +192,16 @@ let timer = setInterval(function () {
         input.value = "submit";
 
 
-        // Add action to form
+        // Add input to form
 
-        form.appendChild(input);
+        quizForm.appendChild(input);
 
 
-        // Automatically submit quiz
+        // Submit quiz automatically
 
-        form.submit();
+        quizForm.submit();
 
     }
-
 
 }, 1000);
 
